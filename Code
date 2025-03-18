@@ -1,0 +1,52 @@
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int P = 0;
+        float A = 0;
+        byte Y = 0;
+        float r = 0;
+        int n = 0;
+
+        Scanner scanner = new Scanner(System.in);
+
+        while(true) {
+            System.out.print("Principal (1K - 1M): ");
+            P = scanner.nextInt();
+            if (P >= 1000 && P < 1_000_000)
+                break;
+            System.out.println("Enter a value bigger than 1000 and less than 1_000_000");
+        }
+
+        while(true) {
+            System.out.print("Annual Interest Rate: ");
+            A = scanner.nextFloat();
+            if (A > 0 && A < 30) {
+                r = (A / 100) / 12;
+                break;
+            }
+            System.out.println("Enter a value greater than 0 and less than or equal to 30");
+        }
+
+        while(true) {
+            System.out.print("Period (Years): ");
+            Y = scanner.nextByte();
+            if (Y > 1 && Y < 30) {
+                n = Y * 12;
+                break;
+            }
+            System.out.println("Enter a value between 1 and 30");
+        }
+
+            double M = P * (((r * Math.pow((1 + r), n)) / (Math.pow((1 + r), n) - 1)));
+
+            NumberFormat currency = NumberFormat.getCurrencyInstance(Locale.US);
+            String mortgage = currency.format(M);
+
+            System.out.println("Mortgage: " + mortgage);
+
+
+    }
+}
